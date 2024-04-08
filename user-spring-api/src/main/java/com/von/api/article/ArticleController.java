@@ -1,38 +1,63 @@
 package com.von.api.article;
 
-import com.von.api.enums.Messenger;
-import com.von.api.user.User;
+import com.von.api.article.service.ArticleServiceImpl;
+import com.von.api.common.component.MessengerVO;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.util.*;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
+
+@RequestMapping(path="/api/articles")
+@Slf4j
+
+
+@ApiResponses(value = {
+        @ApiResponse(responseCode = "400", description = "Invalid ID supplied"),
+        @ApiResponse(responseCode = "404", description = "Customer not found")})
+
 public class ArticleController {
     private final ArticleServiceImpl service;
 
-    @GetMapping("/api/all-articles")
-    public Map<?, ?> findAll() throws SQLException {
-        Map<String, Object> map = new HashMap<>();
-        map.put("message", Messenger.SUCCESS);
-//        @SuppressWarnings("unchecked")
-//        List<Article> list = service.findAll();
-//        map.put("result", list);
-
-        map.put("result", List.of(Article.builder()
-                .id(1L)
-                .title("articleTitle1")
-                .content("content1")
-//                .writer(User.builder().id(2L).build())
-                .postdate("date")
-                .build()));
-
-        return map;
+    @PostMapping( "")
+    public ResponseEntity<MessengerVO> save(Pageable pageable) throws SQLException {
+        service.save(null);
+        return ResponseEntity.ok(new MessengerVO());
     }
+    @DeleteMapping(path = "/delete/{id}")
+    public ResponseEntity<MessengerVO> deleteById(@PathVariable long id) throws SQLException {
+        service.deleteById(0L);
+        return ResponseEntity.ok(new MessengerVO());
+    }
+    @GetMapping(path = "/find")
+    public ResponseEntity<MessengerVO> findAll(Pageable pageable) throws SQLException {
+        service.findAll(null);
+        return ResponseEntity.ok(new MessengerVO());
+    }
+    @GetMapping(path = "/find/{id}")
+    public ResponseEntity<MessengerVO> findById(Pageable pageable) throws SQLException {
+        service.findById(0L);
+        return ResponseEntity.ok(new MessengerVO());
+    }
+    @GetMapping(path = "/count")
+    public ResponseEntity<MessengerVO> count(Pageable pageable) throws SQLException {
+        service.count();
+        return ResponseEntity.ok(new MessengerVO());
+    }
+
+    @GetMapping(path = "/exists/{id}")
+    public ResponseEntity<MessengerVO> existById(Pageable pageable) throws SQLException {
+        service.existById(0L);
+        return ResponseEntity.ok(new MessengerVO());
+    }
+
+
 }

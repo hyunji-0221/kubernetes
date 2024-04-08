@@ -4,10 +4,10 @@ import { useState } from "react"
 import axios from 'axios';
 import Link from "next/link";
 import { Button, Input } from "@mui/material";
-import { API } from "../redux/common/enums/API";
-import AxiosConfig from "../redux/common/configs/axios-configs";
-import { PG } from "../redux/common/enums/PG";
-import Header from "./components/layout/header";
+import { API } from "./components/common/enums/API";
+import AxiosConfig from "./components/common/configs/axios-configs";
+import { PG } from "./components/common/enums/PG";
+import Header from "./components/common/module/header";
 
 
 export default function Home() {
@@ -35,13 +35,13 @@ export default function Home() {
     <Input type='text' onChange={handleChange} />
     <Button onClick={handleClick}>전송</Button><br /><br />
     <Link href={`${PG.USER}/login`} >로그인</Link><br /><br />
-    <Link href={`${PG.USER}/join`} >회원가입</Link><br /><br />
+    <Link href={`${PG.USER}/register`} >회원가입</Link><br /><br />
     <Link href={`${PG.USER}/userList`} >all-users</Link><br /><br />
-    <Link href={`${PG.DEMO}/companies`} >회사</Link><br /><br />
+    <Link href={`${PG.DEMO}/companies/list`} >회사</Link><br /><br />
     <Link href={`${PG.DEMO}/mui-demo`} >MUI 데모</Link><br /><br />
     <Link href={`${PG.DEMO}/counter`} >카운터 데모</Link><br /><br />
     <Link href={`${PG.DEMO}/redux-counter`} >리덕스 카운터</Link><br /><br />
-    <Link href={`${PG.BOARD}/articles`} >all-articles</Link><br /><br />
+    <Link href={`${PG.BOARD}/article`} >all-articles</Link><br /><br />
   </div>
   );
 }

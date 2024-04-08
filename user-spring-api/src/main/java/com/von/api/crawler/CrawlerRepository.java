@@ -1,6 +1,6 @@
 package com.von.api.crawler;
 
-import com.von.api.common.AbstractRepository;
+import com.von.api.common.repository.AbstractRepository;
 import lombok.RequiredArgsConstructor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;

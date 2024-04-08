@@ -1,8 +1,8 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
-import countReducer from "@/redux/features/counter/counter.slice";
-import articleReducer from "@/redux/features/articles/article.slice";
-import userReducer from "@/redux/features/users/user.slice";
+import countReducer from "@/app/components/counter/service/counter.slice";
+import articleReducer from "@/app/components/articles/service/article.slice";
+import userReducer from "@/app/components/users/service/user.slice";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 
 const createNoopStorage = () => {
@@ -46,8 +46,9 @@ const persistedArticleReducer = persistReducer(articlePersistConfig, articleRedu
 const persistedUserReducer = persistReducer(userPersistConfig, userReducer)
 
 export const rootReducer = combineReducers({
+  // Slice를 합치고 있음.(combineReducers)
   count: persistedCountReducer,
   article: persistedArticleReducer, //-> 이름으로
   user: persistedUserReducer
-});
+}); //json 구조가 합쳐져 외부에서 key로 value를 찾음.
 
