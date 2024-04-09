@@ -1,7 +1,4 @@
-//Entity와 같은 거라고 생각
-//.ts는 TypeScript 문법
-
-export interface UserColumn{
+export interface IUser {
     id? : number,
     username? : string,
     password? : string,
@@ -9,5 +6,8 @@ export interface UserColumn{
     phone? : string,
     name? : string,
     job? : string,
+    postdate? : string,
+    modDate? : string,
+    articles? : number,
     array? : []
 }

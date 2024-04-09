@@ -3,8 +3,8 @@ import { GridRow, GridColDef } from '@mui/x-data-grid'
 import { UserColumn } from '../model/UserColumn'
 
 //타입의 정의는 function 밖에서
-interface CellType{
-    row : UserColumn
+interface CellType {
+    row: UserColumn
 }
 
 export default function UsersColumns(): GridColDef[] {
@@ -16,52 +16,66 @@ export default function UsersColumns(): GridColDef[] {
                 sortable: false,
                 field: 'id',
                 headerName: 'No.',
-                renderCell :({row}:CellType) => <Typography textAlign="center" sx={{ fontSize: "1.5rem" }}>{row.id}</Typography>
-                
+                renderCell: ({ row }: CellType) => 
+                <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.id}</Typography>
+
             },
             {
                 flex: 0.04,
                 minWidth: 30,
                 sortable: false,
                 field: 'username',
-                headerName: 'UserName',
-                renderCell: ({row}:CellType) => <Typography textAlign="center" sx={{ fontSize: "1.5rem" }}>{row.username}</Typography>
-                
+                headerName: '아이디',
+                renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.username}</Typography>
             },
             {
                 flex: 0.04,
                 minWidth: 30,
                 sortable: false,
                 field: 'password',
-                headerName: 'Password',
+                headerName: '비밀번호',
                 renderCell() {
-                    return <>********</>
+                    return <>*********</>
                 }
             },
             {
                 flex: 0.04,
                 minWidth: 30,
                 sortable: false,
+                field: 'email',
+                headerName: '이메일',
+                renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.email}</Typography>
+            },
+            {
+                flex: 0.04,
+                minWidth: 30,
+                sortable: false,
                 field: 'name',
-                headerName: 'Name',
-                renderCell: ({row}:CellType) => <Typography textAlign="center" sx={{ fontSize: "1.5rem" }}>{row.name}</Typography>
+                headerName: '이름',
+                renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.name}</Typography>
             },
             {
                 flex: 0.04,
                 minWidth: 30,
                 sortable: false,
                 field: 'phone',
-                headerName: 'Phone',
-                renderCell: ({row}:CellType) => <Typography textAlign="center" sx={{ fontSize: "1.5rem" }}>{row.phone}</Typography>
+                headerName: '전화번호',
+                renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.phone}</Typography>
             },
             {
                 flex: 0.04,
                 minWidth: 30,
                 sortable: false,
                 field: 'job',
-                headerName: 'Job',
-                renderCell: ({row}:CellType) => <Typography textAlign="center" sx={{ fontSize: "1.5rem" }}>{row.job}</Typography>
-            },
+                headerName: '직업',
+                renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.job}</Typography>
+            }
+
         ]
     )
 }

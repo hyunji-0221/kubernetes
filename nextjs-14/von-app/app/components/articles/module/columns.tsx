@@ -1,6 +1,14 @@
 import { GridColDef } from "@mui/x-data-grid";
+import { ArticleColumn } from "../model/ArticleColumn";
+import { Typography } from "@mui/material";
 
-export default function Columns(): GridColDef[]{
+//타입의 정의는 function 밖에서
+interface CellType {
+    row: ArticleColumn
+}
+
+
+export default function ArticleColumns(): GridColDef[]{
     return [
         {
             flex : 0.04,
@@ -8,9 +16,8 @@ export default function Columns(): GridColDef[]{
             sortable : false,
             field : 'id',
             headerName : 'ID',
-            renderCell(){
-                return <></>
-            }
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.id}</Typography>
         },
         {
             flex : 0.04,
@@ -18,9 +25,8 @@ export default function Columns(): GridColDef[]{
             sortable : false,
             field : 'title',
             headerName : 'Title',
-            renderCell(){
-                return <></>
-            }
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.title}</Typography>
         },
         {
             flex : 0.04,
@@ -28,9 +34,26 @@ export default function Columns(): GridColDef[]{
             sortable : false,
             field : 'content',
             headerName : 'Content',
-            renderCell(){
-                return <></>
-            }
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.content}</Typography>
+        },
+        {
+            flex : 0.04,
+            minWidth : 30,
+            sortable : false,
+            field : 'writeId',
+            headerName : 'writeId',
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.writeId}</Typography>
+        },
+        {
+            flex : 0.04,
+            minWidth : 30,
+            sortable : false,
+            field : 'boardId',
+            headerName : 'boardId',
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.boardId}</Typography>
         },
         {
             flex : 0.04,
@@ -38,9 +61,17 @@ export default function Columns(): GridColDef[]{
             sortable : false,
             field : 'postdate',
             headerName : 'PostDate',
-            renderCell(){
-                return <></>
-            }
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.postdate}</Typography>
+        },
+        {
+            flex : 0.04,
+            minWidth : 30,
+            sortable : false,
+            field : 'modDate',
+            headerName : 'modDate',
+            renderCell: ({ row }: CellType) =>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.modDate}</Typography>
         },
     ]
 }

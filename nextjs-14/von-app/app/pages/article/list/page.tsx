@@ -3,25 +3,18 @@
 import { useState, useEffect } from "react"
 import { useSelector, useDispatch } from 'react-redux'
 import { NextPage } from "next";
-import { fetchAllArticles } from "@/app/components/articles/service/article.service";
-import { getAllArticles } from "@/app/components/articles/service/article.slice";
+import { findAllArticles } from "@/app/components/articles/service/article-service";
+import { getAllArticles } from "@/app/components/articles/service/article-slice";
 
 import { Box } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import Columns from "@/app/components/articles/module/columns";
 import Header from "@/app/components/common/module/header";
+import ArticleColumns from "@/app/components/articles/module/columns";
 // import React from "react";
-
-interface IArticle {
-    id: number,
-    title: string,
-    content: string,
-    writer: string,
-    postdate: string
-}
 
 const ArtilcesPage: NextPage = ({data}:any) => {
     const dispatch = useDispatch()
+
     const allArticles: [] = useSelector(getAllArticles)
 
     if (allArticles !== undefined) {
@@ -37,27 +30,19 @@ const ArtilcesPage: NextPage = ({data}:any) => {
 
 
     useEffect(() => {
-        dispatch(fetchAllArticles(1))
+        dispatch(findAllArticles(1))
     }, [])
 
     return (<>
-        <h2>개인페이지 Article</h2>
         <Header></Header>
+        <h2>개인페이지 Article</h2>
         <Box sx={{ height: 400, width: '100%' }}>
-            <DataGrid
-                rows={data}
-                columns={Columns()}
-                initialState={{
-                    pagination: {
-                        paginationModel: {
-                            pageSize: 5,
-                        },
-                    },
-                }}
-                pageSizeOptions={[5]}
+            {allArticles && <DataGrid
+                rows={allArticles}
+                columns={ArticleColumns()}
+                pageSizeOptions={[5, 10, 20]}
                 checkboxSelection
-                disableRowSelectionOnClick
-            />
+            />}
         </Box>
     </>)
 }
