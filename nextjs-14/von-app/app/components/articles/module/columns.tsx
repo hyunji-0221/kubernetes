@@ -1,6 +1,8 @@
 import { GridColDef } from "@mui/x-data-grid";
 import { ArticleColumn } from "../model/ArticleColumn";
 import { Typography } from "@mui/material";
+import Link from "next/link";
+import { PG } from "../../common/enums/PG";
 
 //타입의 정의는 function 밖에서
 interface CellType {
@@ -26,7 +28,9 @@ export default function ArticleColumns(): GridColDef[]{
             field : 'title',
             headerName : 'Title',
             renderCell: ({ row }: CellType) =>
-                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.title}</Typography>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}> 
+                        <Link href={`${PG.ART}/detail/${row.id}`}> {row.title}</Link>
+                    </Typography>
         },
         {
             flex : 0.04,

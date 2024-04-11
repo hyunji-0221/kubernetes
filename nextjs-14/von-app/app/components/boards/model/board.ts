@@ -5,5 +5,8 @@ export interface IBoard{
     boardType? : string,
     postdate? : string,
     modDate? : string,
-    array?: []
+    json? : IBoard,
+    array?: [],
+
+    count?:number,
 }

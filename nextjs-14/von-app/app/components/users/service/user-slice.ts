@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { initialState } from "./user-init"
-import { findAllUsers } from "./user-service"
+import { countUsers, deleteUserById, findAllUsers, findUserById } from "./user-service"
 
 const userThunks = [findAllUsers]
 
@@ -10,21 +10,24 @@ const status = {
     rejected : 'rejected'
 }
 
-const handleFulfilled = (state : any, {payload} : any)=>{
-    console.log('-------------- 자바 다녀온 객체 --------------')
-    state.array = payload
-    console.log(state.array)
-}
 
 export const userSlice = createSlice({
     name : "users",
     initialState,
-    reducers : {},
+    reducers : {
+        passwordHandler:(state:any,{payload}) => {state.json.password = payload},
+        phoneHandler:(state:any,{payload}) => {state.json.phone = payload},
+        jobHandler:(state:any,{payload}) => {state.json.job = payload},
+
+    },
     extraReducers : builder => {
         const {pending, rejected} = status;
 
         builder
-        .addCase(findAllUsers.fulfilled, handleFulfilled)
+        .addCase(findAllUsers.fulfilled, (state : any, {payload} : any)=>{state.array = payload})
+        .addCase(findUserById.fulfilled, (state : any, {payload} : any)=>{state.json = payload})
+        .addCase(countUsers.fulfilled, (state : any, {payload} : any)=>{state.number = payload})
+        .addCase(deleteUserById.fulfilled, (state : any, {payload} : any)=>{state.message = payload})
     }
 })
 
@@ -34,5 +37,9 @@ export const getAllUsers = (state : any) => {
     return state.user.array;
 }
 
-export const{} = userSlice.actions
+export const getUserById = ( state : any ) => ( state.user.json )
+export const getCountsUsers = ( state : any ) => ( state.user.number )
+export const getDeleteResult = ( state : any ) => ( state.user.message )
+
+export const{ passwordHandler, phoneHandler, jobHandler } = userSlice.actions
 export default userSlice.reducer;

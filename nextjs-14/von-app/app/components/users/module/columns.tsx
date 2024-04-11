@@ -1,6 +1,7 @@
-import { Typography } from '@mui/material'
+import { Link, Typography } from '@mui/material'
 import { GridRow, GridColDef } from '@mui/x-data-grid'
 import { UserColumn } from '../model/UserColumn'
+import { PG } from '../../common/enums/PG'
 
 //타입의 정의는 function 밖에서
 interface CellType {
@@ -27,7 +28,9 @@ export default function UsersColumns(): GridColDef[] {
                 field: 'username',
                 headerName: '아이디',
                 renderCell: ({ row }: CellType) =>
-                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>  {row.username}</Typography>
+                    <Typography textAlign="center" sx={{ fontSize: "1.2rem" }}>
+                        <Link href={`${PG.USER}/detail/${row.id}`} > {row.username}</Link> 
+                   </Typography>
             },
             {
                 flex: 0.04,

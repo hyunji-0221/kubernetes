@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { initialState } from "./board-init"
-import { findAllBoards, findBoardById } from "./board-service"
+import { countBoards, findAllBoards, findBoardById } from "./board-service"
+import { retry } from "@reduxjs/toolkit/query"
 
 const userThunks = [findAllBoards]
 
@@ -8,12 +9,6 @@ const status = {
     pending : 'pending',
     fulfilled : 'fulfilled',
     rejected : 'rejected'
-}
-
-const handleFulfilled = (state : any, {payload} : any)=>{
-    console.log('-------------- 자바 다녀온 객체 --------------')
-    state.array = payload
-    console.log(state.array)
 }
 
 export const boardSlice = createSlice({
@@ -24,22 +19,22 @@ export const boardSlice = createSlice({
         const {pending, rejected} = status;
 
         builder
-        .addCase(findAllBoards.fulfilled, handleFulfilled)
-        .addCase(findBoardById.fulfilled, handleFulfilled)
+        .addCase(findAllBoards.fulfilled, (state : any, {payload} : any)=>{ state.array = payload })
+        .addCase(findBoardById.fulfilled, (state : any, {payload} : any)=>{ state.json = payload })
+        .addCase(countBoards.fulfilled, (state : any, {payload}:any)=>{ state.number=payload })
     }
 })
 
 export const getAllBoards = (state : any) => {
     console.log('--------------before useSelector--------------')
     console.log(JSON.stringify(state.board.array))
-    return state.board.array;
+    return state.board.array
 }
 
-export const getAllBoardsById = (state :any) => {
-    console.log('==== get All Boards By id ====')
-    console.log(state.board.array)
-    return state.board.array;
-}
+export const getAllBoardsById = (state :any) => (state.board.json)
+
+export const getCountsBoards = (state:any) => (state.board.number)
+
 
 export const{} = boardSlice.actions
 export default boardSlice.reducer;

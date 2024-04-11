@@ -1,3 +1,5 @@
+import { IBoard } from "./board"
+
 export interface BoardColumn{
     id? : number,
     articles? : number,
@@ -5,5 +7,6 @@ export interface BoardColumn{
     boardType? : string,
     postdate? : string,
     modDate? : string,
+    json? : IBoard,
     array?: []
 }

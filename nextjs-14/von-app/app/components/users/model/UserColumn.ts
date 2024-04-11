@@ -9,5 +9,6 @@ export interface UserColumn{
     phone? : string,
     name? : string,
     job? : string,
+    json? : {},
     array? : []
 }
