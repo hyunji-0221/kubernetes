@@ -29,5 +29,8 @@ export const deleteUserById : any = createAsyncThunk(
 
 export const modifyUserById : any = createAsyncThunk(
     'users/modifyUserById',
-    async(getUser:any) => (await modifyUserByIdAPI(getUser))
+    async(getUser:any) => {
+        console.log('Modify user-service')
+        return await modifyUserByIdAPI(getUser)}
+    
 )

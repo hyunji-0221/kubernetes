@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import { initialState } from "./user-init"
-import { countUsers, deleteUserById, findAllUsers, findUserById } from "./user-service"
+import { countUsers, deleteUserById, findAllUsers, findUserById, modifyUserById } from "./user-service"
 
 const userThunks = [findAllUsers]
 
@@ -28,6 +28,7 @@ export const userSlice = createSlice({
         .addCase(findUserById.fulfilled, (state : any, {payload} : any)=>{state.json = payload})
         .addCase(countUsers.fulfilled, (state : any, {payload} : any)=>{state.number = payload})
         .addCase(deleteUserById.fulfilled, (state : any, {payload} : any)=>{state.message = payload})
+        .addCase(modifyUserById.fulfilled, (state :any, {payload}:any)=>{state.message=payload})
     }
 })
 
@@ -39,7 +40,6 @@ export const getAllUsers = (state : any) => {
 
 export const getUserById = ( state : any ) => ( state.user.json )
 export const getCountsUsers = ( state : any ) => ( state.user.number )
-export const getDeleteResult = ( state : any ) => ( state.user.message )
 
 export const{ passwordHandler, phoneHandler, jobHandler } = userSlice.actions
 export default userSlice.reducer;

@@ -4,7 +4,7 @@ import { useEffect } from "react"
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { IUser } from "@/app/components/users/model/user-model"
-import { getDeleteResult, getUserById, jobHandler, passwordHandler, phoneHandler } from "@/app/components/users/service/user-slice"
+import { getUserById, jobHandler, passwordHandler, phoneHandler } from "@/app/components/users/service/user-slice"
 import { deleteUserById, findUserById, modifyUserById } from "@/app/components/users/service/user-service"
 import Header from "@/app/components/common/module/header"
 import { Stack } from "@mui/material"
@@ -24,8 +24,6 @@ export default function UserDetailPage({ params }: any) { // payload를 사용
         dispatch(findUserById(params.id))
     }, [])
 
-    const result : IUser = useSelector(getDeleteResult)
-
     const  deleteHandle = () =>{
         dispatch(deleteUserById(params.id))
         router.push(`${PG.USER}/list`)
@@ -37,13 +35,13 @@ export default function UserDetailPage({ params }: any) { // payload를 사용
 
     const modifyHandle = () => {
         dispatch(modifyUserById(getUser))
-        router.refresh()
+        router.push(`${PG.USER}/list`)
     }
 
     return (
         <>
             <Header></Header>
-            <span>ID : </span><Input   sx={{ fontSize: "1.2rem" }} defaultValue={params.id} /> <br /><br />
+            <span>ID : </span><Input readOnly sx={{ fontSize: "1.2rem" }} defaultValue={params.id} /> <br /><br />
             <span>이름 : </span><Input readOnly sx={{ fontSize: "1.2rem" }} defaultValue={getUser.name}/> <br /><br />
             <span>사용자ID : </span><Input readOnly sx={{ fontSize: "1.2rem" }} defaultValue={getUser.username} /> <br /><br />
             <span>비밀번호 : </span><Input onChange={handleChangePassword} sx={{ fontSize: "1.2rem" }} defaultValue={getUser.password} /> <br /><br />

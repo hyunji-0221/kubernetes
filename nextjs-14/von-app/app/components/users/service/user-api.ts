@@ -37,6 +37,7 @@ export const deleteUserByIdAPI = async(id:number) => {
 
 export const modifyUserByIdAPI = async (getUser:any) => {
     try{
+        console.log('Modify API')
         return (await instance.put('/users/modify',{ params : {getUser}})).data
     }
     catch(error){
