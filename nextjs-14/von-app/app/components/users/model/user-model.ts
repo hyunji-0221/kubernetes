@@ -13,3 +13,4 @@ export interface IUser {
     array? : IUser[],
     message? : string,
 }
+//자바의 instance 변수들을 모아놓은 것.

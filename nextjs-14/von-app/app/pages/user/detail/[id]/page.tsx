@@ -34,6 +34,7 @@ export default function UserDetailPage({ params }: any) { // payload를 사용
     const handleChangeJob = (e:any) => dispatch(jobHandler(e.target.value))
 
     const modifyHandle = () => {
+        console.log('page '+JSON.stringify(getUser))
         dispatch(modifyUserById(getUser))
         router.push(`${PG.USER}/list`)
     }

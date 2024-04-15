@@ -45,7 +45,6 @@ const LoginPage : NextPage = () => {
 
     return (
         <>
-        <Header></Header>
             <h2>로그인 화면</h2>
             <input type="text" onChange={handleId}></input><br />
             <input type="text" onChange={handlePW}></input>

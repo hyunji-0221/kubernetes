@@ -11,3 +11,15 @@
     border-right : solid 1px black;
     border-bottom : solid 1px black;
 }
+
+@layer utilities {
+    @variants responsive {
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+    }
+  } 
